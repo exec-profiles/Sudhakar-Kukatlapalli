@@ -475,6 +475,7 @@ img {
   visibility: hidden;
   pointer-events: none;
   z-index: 1;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 35%, #f0fdf4 70%, #ffffff 100%);
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transform: scale(1.01);
 }
@@ -496,6 +497,8 @@ img {
   object-position: center;
   z-index: 1;
   filter: brightness(1.03) contrast(1.1) saturate(1.22);
+  font-size: 0;
+  color: transparent;
 }
 
 .hero-slide-overlay {
