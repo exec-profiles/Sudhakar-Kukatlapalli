@@ -22,8 +22,8 @@
     <nav class="apple-navbar" aria-label="Main Navigation">
       <!-- Apple Brand Lockup (Niixon Logo + Sudhakar Kukatlapalli) -->
       <a href="#hero" class="apple-nav-brand">
-        <img src="assets/niixon-logo-transparent.png" alt="NIIXON" class="apple-brand-logo apple-logo-light" onerror="this.style.display='none'">
-        <img src="assets/niixon-logo-dark.png" alt="NIIXON" class="apple-brand-logo apple-logo-dark" onerror="this.style.display='none'">
+        <img src="assets/niixon-logo-transparent.png" alt="NIIXON" class="apple-brand-logo apple-logo-light" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='niixon-logo-transparent.png';}else{this.style.display='none';}">
+        <img src="assets/niixon-logo-dark.png" alt="NIIXON" class="apple-brand-logo apple-logo-dark" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='niixon-logo-dark.png';}else{this.style.display='none';}">
         <span class="apple-brand-divider"></span>
         <span class="apple-brand-name">Sudhakar Kukatlapalli</span>
       </a>
@@ -86,7 +86,7 @@
       <div class="hero-slides-wrapper">
         <!-- Slide 1: Sudhakar Kukatlapalli Official Professional Career Portfolio -->
         <div class="hero-slide active" data-slide-index="0">
-          <img src="assets/hero-light-slide-1.jpg" alt="Corporate Treasury Command Center & Financial Positioning Matrices in Bright Daylight" class="hero-slide-bg" onerror="this.style.opacity='0'">
+          <img src="assets/hero-light-slide-1.jpg" alt="Corporate Treasury Command Center & Financial Positioning Matrices in Bright Daylight" class="hero-slide-bg" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='hero-light-slide-1.jpg';}else{this.style.opacity='0';}">
           <div class="hero-slide-overlay"></div>
           <div class="skad-hero-content">
             <!-- Prominent Career Branding Eyebrow Banner -->
@@ -125,7 +125,7 @@
 
         <!-- Slide 2: NIIXON Enterprise Treasury & Risk Advisory -->
         <div class="hero-slide" data-slide-index="1">
-          <img src="assets/hero-light-slide-2.jpg" alt="Executive Financial Advisory Boardroom with Translucent IFRS 9 Hedge Models in Bright Daylight" class="hero-slide-bg" onerror="this.style.opacity='0'">
+          <img src="assets/hero-light-slide-2.jpg" alt="Executive Financial Advisory Boardroom with Translucent IFRS 9 Hedge Models in Bright Daylight" class="hero-slide-bg" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='hero-light-slide-2.jpg';}else{this.style.opacity='0';}">
           <div class="hero-slide-overlay"></div>
           <div class="skad-hero-content">
             <!-- Company Advisory Eyebrow Banner -->
@@ -313,7 +313,7 @@
           <div class="apple-carousel-viewport">
             <!-- Slide 1: S/4HANA TRM & Multi-Bank STP -->
             <div class="carousel-slide-item active" data-slide-index="0">
-              <img src="assets/slide-1-trm-architecture.jpg" alt="Enterprise SAP S/4HANA Treasury Hub & STP" class="slide-bg-img">
+              <img src="assets/slide-1-trm-architecture.jpg" alt="Enterprise SAP S/4HANA Treasury Hub & STP" class="slide-bg-img" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='slide-1-trm-architecture.jpg';}">
               <div class="slide-gradient-overlay"></div>
               
               <div class="slide-overlay-content">
@@ -363,7 +363,7 @@
 
             <!-- Slide 2: Quantitative FX, Commodity & IFRS 9 -->
             <div class="carousel-slide-item" data-slide-index="1">
-              <img src="assets/slide-2-risk-hedging.jpg" alt="Quantitative FX & Commodity Risk Engineering" class="slide-bg-img">
+              <img src="assets/slide-2-risk-hedging.jpg" alt="Quantitative FX & Commodity Risk Engineering" class="slide-bg-img" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='slide-2-risk-hedging.jpg';}">
               <div class="slide-gradient-overlay"></div>
               
               <div class="slide-overlay-content">
@@ -413,7 +413,7 @@
 
             <!-- Slide 3: Global Bluefield Migrations & CFO Advisory -->
             <div class="carousel-slide-item" data-slide-index="2">
-              <img src="assets/slide-3-global-advisory.jpg" alt="Global Bluefield Migrations & CFO Advisory" class="slide-bg-img">
+              <img src="assets/slide-3-global-advisory.jpg" alt="Global Bluefield Migrations & CFO Advisory" class="slide-bg-img" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='slide-3-global-advisory.jpg';}">
               <div class="slide-gradient-overlay"></div>
               
               <div class="slide-overlay-content">
@@ -1847,7 +1847,7 @@
       <div class="footer-top-grid">
         <!-- Brand Col -->
         <div class="footer-brand-col">
-          <img src="assets/niixon-logo-dark.png" alt="NIIXON Consulting" class="footer-logo-img">
+          <img src="assets/niixon-logo-dark.png" alt="NIIXON Consulting" class="footer-logo-img" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='niixon-logo-dark.png';}else{this.style.display='none';}">
           <p class="footer-brand-tagline">
             <strong>NIIXON Consulting (OPC) Private Limited</strong><br>
             Intelligence, Innovation, Impact.<br>
@@ -2037,6 +2037,47 @@
           startHeroAuto();
         });
       }
+    })();
+
+    // Smart Dual-Path Resolver for Resume and Assets
+    (function() {
+      function syncResumeLinks(validUrl) {
+        var links = document.querySelectorAll('a[download*="Resume"], a[href*="Resume.pdf"]');
+        for (var i = 0; i < links.length; i++) {
+          links[i].setAttribute('href', validUrl);
+        }
+        var iframe = document.querySelector('iframe[src*="Resume.pdf"]');
+        if (iframe) iframe.src = validUrl;
+      }
+
+      // Check if assets folder version is accessible, else fallback to root
+      fetch('assets/Sudhakar_Kukatlapalli_Resume.pdf', { method: 'HEAD' })
+        .then(function(res) {
+          if (res.ok) {
+            syncResumeLinks('assets/Sudhakar_Kukatlapalli_Resume.pdf');
+          } else {
+            syncResumeLinks('Sudhakar_Kukatlapalli_Resume.pdf');
+          }
+        })
+        .catch(function() {
+          syncResumeLinks('Sudhakar_Kukatlapalli_Resume.pdf');
+        });
+
+      // Intercept download clicks to seamlessly retry alternate path if needed
+      document.addEventListener('click', function(e) {
+        var a = e.target.closest('a[download*="Resume"], a[href*="Resume.pdf"]');
+        if (!a) return;
+        var currentHref = a.getAttribute('href');
+        fetch(currentHref, { method: 'HEAD' })
+          .then(function(r) {
+            if (!r.ok) {
+              var alt = currentHref.indexOf('assets/') !== -1 ? currentHref.replace('assets/', '') : 'assets/' + currentHref;
+              a.setAttribute('href', alt);
+              window.location.href = alt;
+            }
+          })
+          .catch(function() {});
+      }, true);
     })();
   </script>
 </body>
